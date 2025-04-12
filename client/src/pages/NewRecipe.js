@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
@@ -20,7 +20,7 @@ function NewRecipe({ user }) {
   `);
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -38,7 +38,7 @@ function NewRecipe({ user }) {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        history.push("/");
+        navigate("/");
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
